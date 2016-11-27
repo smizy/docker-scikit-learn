@@ -49,4 +49,4 @@ deployment:
  #     - docker push smizy/scikit-learn:${TAG_MAJOR}
       - docker push smizy/scikit-learn:latest
       - docker logout
-      - curl -X POST 'https://hooks.microbadger.com/images/smizy/scikit-learn/B67xdho_HXXeXxVkUjT0TlgEmjk='
+      - curl -X POST 'https://hooks.microbadger.com/images/smizy/scikit-learn/kZzvRF3AJodLAJeVZ8aVSKyupOI='
