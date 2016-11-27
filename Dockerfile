@@ -1,4 +1,4 @@
-FROM smizy/python:3-alpine
+FROM smizy/python:3.5-alpine
 MAINTAINER smizy
 
 ARG BUILD_DATE
