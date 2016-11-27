@@ -1,0 +1,7 @@
+.DS_Store
+.vscode/
+*.ipynb
+*.mat
+*.bak
+/mldata/
+/data/
