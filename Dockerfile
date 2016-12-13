@@ -27,7 +27,7 @@ RUN set -x \
         py3-zmq \
     && pip3 install --upgrade pip \
     && pip3 install ipywidgets \
-    && pip3 install jupyter-console \   
+    && pip3 install jupyter-console \
     ## numpy 
     && ln -s /usr/include/locale.h /usr/include/xlocale.h \
     && apk --no-cache add --virtual .builddeps.edge.community \
