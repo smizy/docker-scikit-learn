@@ -20,30 +20,25 @@ RUN set -x \
     && apk update \
     && apk --no-cache add \
         freetype \
-        tini \
-    && apk --no-cache add  \
-        --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ \
         openblas \
         py3-zmq \
+        tini \
     && pip3 install --upgrade pip \
     && pip3 install ipywidgets \
     && pip3 install jupyter-console \
     ## numpy 
     && ln -s /usr/include/locale.h /usr/include/xlocale.h \
-    && apk --no-cache add --virtual .builddeps.edge.community \
-        --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ \
-        openblas-dev \
     && apk --no-cache add --virtual .builddeps \
         build-base \
         freetype-dev \
         gfortran \
+        openblas-dev \
         python3-dev \
     && pip3 install numpy \
     ## scipy
     && pip3 install scipy \
     ## pnadas 
     && apk --no-cache add  \
-        --repository http://dl-cdn.alpinelinux.org/alpine/edge/main/ \
         py3-dateutil \
         py3-tz \
     && pip3 install pandas \
@@ -54,7 +49,6 @@ RUN set -x \
     ## clean
     && apk del \
         .builddeps \
-        .builddeps.edge.community \
     && find /usr/lib/python3.5 -name __pycache__ | xargs rm -r \
     && rm -rf /root/.[acpw]* \
     ## dir
