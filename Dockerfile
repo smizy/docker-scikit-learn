@@ -20,6 +20,7 @@ RUN set -x \
     && apk update \
     && apk --no-cache add \
         freetype \
+        lapack \
         tini \
     && apk --no-cache add  \
         --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ \
@@ -37,6 +38,7 @@ RUN set -x \
         build-base \
         freetype-dev \
         gfortran \
+        lapack-dev \
         python3-dev \
     && pip3 install numpy \
     ## scipy
