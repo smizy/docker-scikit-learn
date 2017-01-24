@@ -46,11 +46,17 @@ RUN set -x \
     && pip3 install scikit-learn \
     ## seaborn/matplotlib
     && pip3 install seaborn \
+    ## jp font
+    && wget http://dl.ipafont.ipa.go.jp/IPAexfont/ipaexg00301.zip \
+    && unzip ipaexg00301.zip \
+    && mkdir -p /usr/share/fonts \
+    && mv /ipaexg00301/ipaexg.ttf /usr/share/fonts/ \
     ## clean
-    && apk del \
-        .builddeps \
+    && apk del .builddeps \
     && find /usr/lib/python3.5 -name __pycache__ | xargs rm -r \
-    && rm -rf /root/.[acpw]* \
+    && rm -rf \
+        /root/.[acpw]* \
+        /ipaexg00301* \
     ## dir
     && mkdir -p /etc/jupyter \
     ## user
