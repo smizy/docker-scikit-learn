@@ -55,7 +55,7 @@ RUN set -x \
     && mv ipaexg00301/ipaexg.ttf /usr/share/fonts/ \
     ## clean
     && apk del .builddeps \
-    && find /usr/lib/python3.5 -name __pycache__ | xargs rm -r \
+    && find /usr/lib/python3.6 -name __pycache__ | xargs rm -r \
     && rm -rf \
         /root/.[acpw]* \
         ipaexg00301* \
