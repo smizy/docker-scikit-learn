@@ -1,4 +1,4 @@
-FROM smizy/python:3.5-alpine
+FROM smizy/python:3.6-alpine
 MAINTAINER smizy
 
 ARG BUILD_DATE
@@ -16,7 +16,7 @@ LABEL \
     org.label-schema.version=$VERSION \
     org.label-schema.vcs-url="https://github.com/smizy/docker-scikit-learn"
 
-ENV SCIKIT_LEARN_VERSION  0.18.2
+ENV SCIKIT_LEARN_VERSION  $VERSION
 
 RUN set -x \
     && apk update \
