@@ -16,6 +16,8 @@ LABEL \
     org.label-schema.version=$VERSION \
     org.label-schema.vcs-url="https://github.com/smizy/docker-scikit-learn"
 
+ENV SCIKIT_LEARN_VERSION  0.18.2
+
 RUN set -x \
     && apk update \
     && apk --no-cache add \
@@ -43,7 +45,7 @@ RUN set -x \
         py3-tz \
     && pip3 install pandas \
     ## scikit-learn 
-    && pip3 install scikit-learn \
+    && pip3 install scikit-learn==${SCIKIT_LEARN_VERSION} \
     ## seaborn/matplotlib
     && pip3 install seaborn \
     ## jp font
