@@ -81,12 +81,12 @@ jobs:
               docker login -u $DOCKER_USER -p $DOCKER_PASS
               docker image tag smizy/scikit-learn:${TAG} smizy/scikit-learn
               docker image tag smizy/scikit-learn:${TAG} smizy/scikit-learn:${TAG_MINOR}
-#              docker image tag smizy/scikit-learn:${TAG} smizy/scikit-learn:${TAG_MAJOR}
+              # docker image tag smizy/scikit-learn:${TAG} smizy/scikit-learn:${TAG_MAJOR}
 
               docker image push smizy/scikit-learn:${TAG}
               docker image push smizy/scikit-learn:${TAG_MINOR}
-#              docker image push smizy/scikit-learn:${TAG_MAJOR}              
-#              docker image push smizy/scikit-learn:latest
+              # docker image push smizy/scikit-learn:${TAG_MAJOR}              
+              # docker image push smizy/scikit-learn:latest
               docker logout
               curl -X POST 'https://hooks.microbadger.com/images/smizy/scikit-learn/kZzvRF3AJodLAJeVZ8aVSKyupOI='
             fi
