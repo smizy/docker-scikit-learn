@@ -1,11 +1,11 @@
 FROM smizy/python:3.6-alpine
-MAINTAINER smizy
 
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
 
 LABEL \
+    maintainer="smizy" \
     org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.docker.dockerfile="/Dockerfile" \
     org.label-schema.license="Apache License 2.0" \
@@ -62,7 +62,8 @@ RUN set -x \
     ## dir
     && mkdir -p /etc/jupyter \
     ## user
-    && adduser -D  -g '' -s /sbin/nologin jupyter 
+    && adduser -D  -g '' -s /sbin/nologin jupyter \
+    && chown -R jupyter:jupyter /code
 
 WORKDIR /code
 
