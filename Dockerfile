@@ -25,6 +25,7 @@ RUN set -x \
         openblas \
         py3-zmq \
         tini \
+        wget \
     && pip3 install --upgrade pip \
     && pip3 install ipywidgets \
     && pip3 install jupyter-console \
