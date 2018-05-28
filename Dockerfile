@@ -62,7 +62,8 @@ RUN set -x \
     ## dir
     && mkdir -p /etc/jupyter \
     ## user
-    && adduser -D  -g '' -s /sbin/nologin jupyter 
+    && adduser -D  -g '' -s /sbin/nologin jupyter \
+    && addgroup jupyter docker
 
 WORKDIR /code
 
