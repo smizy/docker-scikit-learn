@@ -1,0 +1,4 @@
+FROM smizy/scikit-learn:0.19.1-alpine
+
+RUN set -x \
+    && addgroup jupyter docker
