@@ -23,7 +23,7 @@ RUN set -x \
     && apk --no-cache add \
         freetype \
         openblas \
-    #    py3-zmq \
+        py3-zmq \
         tini \
     && pip3 install --upgrade pip \
     && pip3 install ipywidgets \
