@@ -26,6 +26,7 @@ RUN set -x \
         py3-zmq \
         tini \
     && pip3 install --upgrade pip \
+    && pip3 install notebook==5.2.1 \
     && pip3 install ipywidgets \
     && pip3 install jupyter-console \
     ## numpy 
