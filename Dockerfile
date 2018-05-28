@@ -35,6 +35,7 @@ RUN set -x \
         freetype-dev \
         gfortran \
         openblas-dev \
+        pkgconf \
         python3-dev \
         wget \
     && pip3 install numpy \
