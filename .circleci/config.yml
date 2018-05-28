@@ -8,7 +8,7 @@ jobs:
 
     environment:
       VERSION: "0.19.1"
-      TAG: "0.19.1-alpine-r1"
+      TAG: "0.19.1-alpine-r2"
       # TAG: ${VERSION}-alpine
       # TAG_MINOR: ${VERSION%.*}-alpine
       # TAG_MAJOR: ${VERSION%%.*}-alpine 
@@ -90,4 +90,9 @@ jobs:
               docker image push smizy/scikit-learn:latest
               docker logout
               curl -X POST 'https://hooks.microbadger.com/images/smizy/scikit-learn/kZzvRF3AJodLAJeVZ8aVSKyupOI='
+            fi
+
+            if [ "${CIRCLE_BRANCH}" == "fix_not_ioloop_initialized" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker image push smizy/scikit-learn:${TAG}
             fi
