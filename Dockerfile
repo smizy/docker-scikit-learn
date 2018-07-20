@@ -1,4 +1,4 @@
-FROM smizy/python:3.6.1-alpine
+FROM smizy/python:3.6.3-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -52,6 +52,8 @@ RUN set -x \
     && pip3 install scikit-learn==${SCIKIT_LEARN_VERSION} \
     ## seaborn/matplotlib
     && pip3 install seaborn \
+    ## excel read/write 
+    && pip3 install xlrd openpyxl \
     ## jp font
     && wget http://dl.ipafont.ipa.go.jp/IPAexfont/ipaexg00301.zip \
     && unzip ipaexg00301.zip \
