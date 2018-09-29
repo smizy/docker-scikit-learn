@@ -8,7 +8,7 @@ import stat
 PEM_FILE = os.path.join(jupyter_data_dir(), 'notebook.pem')
 
 c = get_config()
-c.NotebookApp.ip = '*'
+c.NotebookApp.ip = '0.0.0.0'
 c.NotebookApp.port = 8888
 c.NotebookApp.open_browser = False
 
