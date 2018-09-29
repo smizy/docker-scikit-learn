@@ -1,4 +1,4 @@
-FROM smizy/python:3.6.3-alpine
+FROM smizy/python:3.6.6-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -23,11 +23,24 @@ RUN set -x \
     && apk --no-cache add \
         freetype \
         openblas \
+        py3-dateutil \
+        py3-decorator \
+        py3-defusedxml \
+        py3-jinja2 \
+        py3-jsonschema \
+        py3-markupsafe \
+        py3-pexpect \
+        py3-prompt_toolkit \
+        py3-pygments \
+        py3-ptyprocess \
+        py3-six \
+        py3-tornado \
+        py3-wcwidth \
         py3-zmq \
         tini \
     && pip3 install --upgrade pip \
-    && pip3 install tornado==4.5.2 \
-    && pip3 install notebook==5.2.1 \
+    && pip3 install ipython==6.5 \
+    && pip3 install notebook \
     && pip3 install ipywidgets \
     && pip3 install jupyter-console \
     ## numpy 
@@ -45,7 +58,6 @@ RUN set -x \
     && pip3 install scipy \
     ## pnadas 
     && apk --no-cache add  \
-        py3-dateutil \
         py3-tz \
     && pip3 install pandas \
     ## scikit-learn 
