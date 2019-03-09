@@ -8,10 +8,10 @@ Python3 scikit-learn with Jupyter docker image based on alpine
 
 ```
 # run Jupyter Notebook container (see token in log)
-docker run  -p 8888:8888 -v $(pwd):/code  -d smizy/scikit-learn
+docker run  -p 8888:8888 -v $PWD:/code  -d smizy/scikit-learn
 
 # Or use PASSWORD environment variable instead of token
-docker run  -p 8888:8888 -v $(pwd):/code -e PASSWORD=yoursecretpass -d smizy/scikit-learn
+docker run  -p 8888:8888 -v $PWD:/code -e PASSWORD=yoursecretpass -d smizy/scikit-learn
 
 # open browser
 open http://$(docker-machine ip default):8888
