@@ -42,7 +42,7 @@ RUN set -x \
     && pip3 install ipython==6.5 \
     && pip3 install notebook \
     && pip3 install ipywidgets \
-    && pip3 install jupyter-console \
+    && pip3 install jupyter-console==5.2 \
     ## numpy 
     && ln -s /usr/include/locale.h /usr/include/xlocale.h \
     && apk --no-cache add --virtual .builddeps \
