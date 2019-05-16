@@ -7,8 +7,8 @@ jobs:
       - image: docker:17.06.0-ce-git
 
     environment:
-      VERSION: "0.20.3"
-      TAG: "0.20.3-alpine"
+      VERSION: "0.21.0"
+      TAG: "0.21.0-alpine"
       # TAG: ${VERSION}-alpine
       # TAG_MINOR: ${VERSION%.*}-alpine
       # TAG_MAJOR: ${VERSION%%.*}-alpine 
@@ -78,7 +78,7 @@ jobs:
             TAG_MINOR=${VERSION%.*}-alpine
             TAG_MAJOR=${VERSION%%.*}-alpine 
 
-            if [ "${CIRCLE_BRANCH}" == "0.20" ]; then
+            if [ "${CIRCLE_BRANCH}" == "0.21" ]; then
               docker login -u $DOCKER_USER -p $DOCKER_PASS
               docker image tag smizy/scikit-learn:${TAG} smizy/scikit-learn
               docker image tag smizy/scikit-learn:${TAG} smizy/scikit-learn:${TAG_MINOR}

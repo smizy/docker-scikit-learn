@@ -1,4 +1,4 @@
-FROM smizy/python:3.6.6-alpine
+FROM smizy/python:3.6.8-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
