@@ -39,6 +39,10 @@ RUN set -x \
         py3-zmq \
         tini \
     && pip3 install --upgrade pip \
+    # PyZMQ with tornado 6.0 raises the wrong warning. #1310
+    # https://github.com/zeromq/pyzmq/issues/1310
+    # > This was fixed in 17.1.3 by #1263 and does not affect pyzmq 18 or master.
+    && pip3 install 'tornado>=5.0,<6.0' \
     && pip3 install ipython==6.5 \
     && pip3 install notebook \
     && pip3 install ipywidgets \
