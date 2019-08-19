@@ -7,8 +7,8 @@ jobs:
       - image: docker:17.06.0-ce-git
 
     environment:
-      VERSION: "0.20.3"
-      TAG: "0.20.3-alpine"
+      VERSION: "0.21.3"
+      TAG: "0.21.3-alpine"
       # TAG: ${VERSION}-alpine
       # TAG_MINOR: ${VERSION%.*}-alpine
       # TAG_MAJOR: ${VERSION%%.*}-alpine 
@@ -78,16 +78,17 @@ jobs:
             TAG_MINOR=${VERSION%.*}-alpine
             TAG_MAJOR=${VERSION%%.*}-alpine 
 
-            if [ "${CIRCLE_BRANCH}" == "0.20" ]; then
-              docker login -u $DOCKER_USER -p $DOCKER_PASS
-              docker image tag smizy/scikit-learn:${TAG} smizy/scikit-learn
-              docker image tag smizy/scikit-learn:${TAG} smizy/scikit-learn:${TAG_MINOR}
-              # docker image tag smizy/scikit-learn:${TAG} smizy/scikit-learn:${TAG_MAJOR}
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            
+            docker image tag smizy/scikit-learn:${TAG} smizy/scikit-learn
+            docker image push smizy/scikit-learn:${TAG}
 
-              docker image push smizy/scikit-learn:${TAG}
-              docker image push smizy/scikit-learn:${TAG_MINOR}
-              # # docker image push smizy/scikit-learn:${TAG_MAJOR}              
-              # docker image push smizy/scikit-learn:latest
-              docker logout
-              curl -X POST 'https://hooks.microbadger.com/images/smizy/scikit-learn/kZzvRF3AJodLAJeVZ8aVSKyupOI='
+            docker image tag smizy/scikit-learn:${TAG} smizy/scikit-learn:${TAG_MINOR}
+            docker image push smizy/scikit-learn:${TAG_MINOR}
+
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker image push smizy/scikit-learn:latest
             fi
+            
+            docker logout
+            curl -X POST 'https://hooks.microbadger.com/images/smizy/scikit-learn/kZzvRF3AJodLAJeVZ8aVSKyupOI='

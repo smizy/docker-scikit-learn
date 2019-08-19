@@ -1,4 +1,4 @@
-FROM smizy/python:3.6.6-alpine
+FROM smizy/python:3.6.8-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -39,6 +39,10 @@ RUN set -x \
         py3-zmq \
         tini \
     && pip3 install --upgrade pip \
+    # PyZMQ with tornado 6.0 raises the wrong warning. #1310
+    # https://github.com/zeromq/pyzmq/issues/1310
+    # > This was fixed in 17.1.3 by #1263 and does not affect pyzmq 18 or master.
+    && pip3 install 'tornado>=5.0,<6.0' \
     && pip3 install ipython==6.5 \
     && pip3 install notebook \
     && pip3 install ipywidgets \
@@ -60,6 +64,8 @@ RUN set -x \
     && apk --no-cache add  \
         py3-tz \
     && pip3 install pandas \
+    ## scikit-learn dependency
+    && pip3 install Cython \
     ## scikit-learn 
     && pip3 install scikit-learn==${SCIKIT_LEARN_VERSION} \
     ## seaborn/matplotlib
@@ -67,16 +73,17 @@ RUN set -x \
     ## excel read/write 
     && pip3 install xlrd openpyxl \
     ## jp font
-    && wget http://dl.ipafont.ipa.go.jp/IPAexfont/ipaexg00301.zip \
-    && unzip ipaexg00301.zip \
+    && wget https://oscdl.ipa.go.jp/IPAexfont/ipaexg00401.zip \
+    && unzip ipaexg00401.zip \
     && mkdir -p /usr/share/fonts \
-    && mv ipaexg00301/ipaexg.ttf /usr/share/fonts/ \
+    && mv ipaexg00401/ipaexg.ttf /usr/share/fonts/ \
     ## clean
-    && apk del .builddeps \
+    && apk del \
+        .builddeps \
     && find /usr/lib/python3.6 -name __pycache__ | xargs rm -r \
     && rm -rf \
         /root/.[acpw]* \
-        ipaexg00301* \
+        ipaexg00401* \
     ## dir
     && mkdir -p /etc/jupyter \
     ## user
