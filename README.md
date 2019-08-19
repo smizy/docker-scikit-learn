@@ -7,8 +7,8 @@ Python3 scikit-learn with Jupyter docker image based on alpine
 
 ## Supported tags and respective `Dockerfile` links
 
-* [0.21.3-alpine, 0.21-alpine](https://github.com/smizy/docker-scikit-learn/blob/c28fd589522fb24bcc73776ec53ff5b08530e555/Dockerfile)
-* [0.20.3-alpine, 0.20-alpine, latest](https://github.com/smizy/docker-scikit-learn/blob/493de94a473993eb7346912c44e305a47a97f7f1/Dockerfile)
+* [0.21.3-alpine, 0.21-alpine, latest](https://github.com/smizy/docker-scikit-learn/blob/c28fd589522fb24bcc73776ec53ff5b08530e555/Dockerfile)
+* [0.20.3-alpine, 0.20-alpine](https://github.com/smizy/docker-scikit-learn/blob/493de94a473993eb7346912c44e305a47a97f7f1/Dockerfile)
 
 ## Usage
 
