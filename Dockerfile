@@ -62,7 +62,7 @@ RUN set -x \
     ## scipy
     # - Missing `int64_t` declaration in rectangular_lsap.cpp #11319
     #   https://github.com/scipy/scipy/issues/11319
-    && pip3 install 'scipy>=1.5,<1.4' \
+    && pip3 install 'scipy<1.4' \
     ## pandas 
     && apk --no-cache add  \
         py3-tz \
