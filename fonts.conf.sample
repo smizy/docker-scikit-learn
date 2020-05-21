@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+    <match target="font">
+        <edit mode="assign" name="antialias"><bool>true</bool></edit>
+        <edit mode="assign" name="hinting"><bool>false</bool></edit>
+    </match>
+
+    <match target="pattern">    
+      <edit name="family" mode="assign" binding="strong">
+         <string>IPAexGothic</string>
+      </edit>
+    </match>
+</fontconfig>

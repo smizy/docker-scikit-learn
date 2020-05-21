@@ -1,4 +1,4 @@
-FROM smizy/python:3.6.8-alpine
+FROM smizy/python:3.7.5-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -21,6 +21,7 @@ ENV SCIKIT_LEARN_VERSION  $VERSION
 RUN set -x \
     && apk update \
     && apk --no-cache add \
+        fontconfig \
         freetype \
         openblas \
         py3-dateutil \
@@ -42,11 +43,11 @@ RUN set -x \
     # PyZMQ with tornado 6.0 raises the wrong warning. #1310
     # https://github.com/zeromq/pyzmq/issues/1310
     # > This was fixed in 17.1.3 by #1263 and does not affect pyzmq 18 or master.
-    && pip3 install 'tornado>=5.0,<6.0' \
-    && pip3 install ipython==6.5 \
+    # && pip3 install 'tornado>=5.0,<6.0' \
+    && pip3 install ipython \
     && pip3 install notebook \
     && pip3 install ipywidgets \
-    && pip3 install jupyter-console==5.2 \
+    && pip3 install jupyter-console \
     ## numpy 
     && ln -s /usr/include/locale.h /usr/include/xlocale.h \
     && apk --no-cache add --virtual .builddeps \
@@ -59,8 +60,10 @@ RUN set -x \
         wget \
     && pip3 install numpy \
     ## scipy
-    && pip3 install scipy \
-    ## pnadas 
+    # - Missing `int64_t` declaration in rectangular_lsap.cpp #11319
+    #   https://github.com/scipy/scipy/issues/11319
+    && pip3 install 'scipy<1.4' \
+    ## pandas 
     && apk --no-cache add  \
         py3-tz \
     && pip3 install pandas \
@@ -73,27 +76,33 @@ RUN set -x \
     ## excel read/write 
     && pip3 install xlrd openpyxl \
     ## jp font
-    && wget https://oscdl.ipa.go.jp/IPAexfont/ipaexg00401.zip \
+    && wget https://ipafont.ipa.go.jp/IPAexfont/ipaexg00401.zip \
     && unzip ipaexg00401.zip \
-    && mkdir -p /usr/share/fonts \
-    && mv ipaexg00401/ipaexg.ttf /usr/share/fonts/ \
+    && mkdir -p \
+        /home/jupyter/.fonts \
+        /home/jupyter/.config/fontconfig \
+    && mv ipaexg00401/ipaexg.ttf /home/jupyter/.fonts/ \
+    && fc-cache -fv \
+    && fc-match \
+    ## user
+    && adduser -D  -g '' -s /sbin/nologin jupyter \
+    && addgroup jupyter docker \
+    && chown -R jupyter:jupyter /home/jupyter \ 
     ## clean
     && apk del \
         .builddeps \
-    && find /usr/lib/python3.6 -name __pycache__ | xargs rm -r \
+    && find /usr/lib/python3.7 -name __pycache__ | xargs rm -r \
     && rm -rf \
         /root/.[acpw]* \
         ipaexg00401* \
     ## dir
-    && mkdir -p /etc/jupyter \
-    ## user
-    && adduser -D  -g '' -s /sbin/nologin jupyter \
-    && addgroup jupyter docker
+    && mkdir -p /etc/jupyter 
 
 WORKDIR /code
 
 COPY entrypoint.sh  /usr/local/bin/
 COPY jupyter_notebook_config.py /etc/jupyter/
+# COPY fonts.conf  /home/jupyter/.config/fontconfig
 
 EXPOSE 8888
 

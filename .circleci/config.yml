@@ -7,8 +7,8 @@ jobs:
       - image: docker:17.06.0-ce-git
 
     environment:
-      VERSION: "0.21.3"
-      TAG: "0.21.3-alpine"
+      VERSION: "0.22.2.post1"
+      TAG: "0.22.2.post1-alpine"
       # TAG: ${VERSION}-alpine
       # TAG_MINOR: ${VERSION%.*}-alpine
       # TAG_MAJOR: ${VERSION%%.*}-alpine 
@@ -75,7 +75,7 @@ jobs:
           name: docker image push
           command: |
 
-            TAG_MINOR=${VERSION%.*}-alpine
+            TAG_MINOR=0.22-alpine
             TAG_MAJOR=${VERSION%%.*}-alpine 
 
             docker login -u $DOCKER_USER -p $DOCKER_PASS
