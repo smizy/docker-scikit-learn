@@ -1,4 +1,4 @@
-FROM smizy/python:3.7.5-alpine
+FROM smizy/python:3.8.2-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -31,15 +31,16 @@ RUN set -x \
         py3-jsonschema \
         py3-markupsafe \
         py3-pexpect \
+        py3-prometheus-client \
         py3-prompt_toolkit \
         py3-pygments \
         py3-ptyprocess \
         py3-six \
         py3-tornado \
         py3-wcwidth \
-        py3-zmq \
+        py3-pyzmq \
         tini \
-    && pip3 install --upgrade pip \
+    && pip3 install --upgrade pip setuptools wheel \
     # PyZMQ with tornado 6.0 raises the wrong warning. #1310
     # https://github.com/zeromq/pyzmq/issues/1310
     # > This was fixed in 17.1.3 by #1263 and does not affect pyzmq 18 or master.
@@ -58,19 +59,20 @@ RUN set -x \
         pkgconf \
         python3-dev \
         wget \
-    && pip3 install numpy \
+    ## dependency for pandas 
+    && apk --no-cache add  \
+        py3-tz \
     ## scipy
     # - Missing `int64_t` declaration in rectangular_lsap.cpp #11319
     #   https://github.com/scipy/scipy/issues/11319
-    && pip3 install 'scipy<1.4' \
-    ## pandas 
-    && apk --no-cache add  \
-        py3-tz \
-    && pip3 install pandas \
-    ## scikit-learn dependency
-    && pip3 install Cython \
+    && pip3 install \
+        Cython \
+        numpy \
+        pandas \
+        'scipy<1.4' \
     ## scikit-learn 
-    && pip3 install scikit-learn==${SCIKIT_LEARN_VERSION} \
+    ## --no-use-pep517: pyproject.toml cause to forcely build  (ignoring requirement matched dependency)
+    && pip3 install --no-use-pep517 scikit-learn==${SCIKIT_LEARN_VERSION} \
     ## seaborn/matplotlib
     && pip3 install seaborn \
     ## excel read/write 
@@ -91,7 +93,7 @@ RUN set -x \
     ## clean
     && apk del \
         .builddeps \
-    && find /usr/lib/python3.7 -name __pycache__ | xargs rm -r \
+    && find /usr/lib/python3.8 -name __pycache__ | xargs rm -r \
     && rm -rf \
         /root/.[acpw]* \
         ipaexg00401* \
