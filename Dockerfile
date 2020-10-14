@@ -78,7 +78,7 @@ RUN set -x \
     ## excel read/write 
     && pip3 install xlrd openpyxl \
     ## jp font
-    && wget https://ipafont.ipa.go.jp/IPAexfont/ipaexg00401.zip \
+    && wget https://moji.or.jp/wp-content/ipafont/IPAexfont/ipaexg00401.zip \
     && unzip ipaexg00401.zip \
     && mkdir -p \
         /home/jupyter/.fonts \
