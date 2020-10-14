@@ -24,6 +24,7 @@ RUN set -x \
         fontconfig \
         freetype \
         openblas \
+        py3-argon2-cffi \
         py3-dateutil \
         py3-decorator \
         py3-defusedxml \
