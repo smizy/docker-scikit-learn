@@ -79,6 +79,9 @@ RUN set -x \
     ## --no-use-pep517: pyproject.toml cause to build  (ignoring requirement matched dependency)
     && pip3 install --no-use-pep517 scikit-learn==${SCIKIT_LEARN_VERSION} \
     ## seaborn/matplotlib
+    ## dependency for seaborn(use alpine-package to avoid compile error) 
+    && apk --no-cache add  \
+        py3-pillow \
     && pip3 install seaborn \
     ## excel read/write 
     && pip3 install xlrd openpyxl \
