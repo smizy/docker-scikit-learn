@@ -63,16 +63,20 @@ RUN set -x \
     ## dependency for pandas 
     && apk --no-cache add  \
         py3-tz \
+    ## pandas
+    # - BUG: error: may be used uninitialized. In alpine #35622
+    #   https://github.com/pandas-dev/pandas/issues/35622
+    #   will be fixed on 1.2 release
     ## scipy
     # - Missing `int64_t` declaration in rectangular_lsap.cpp #11319
     #   https://github.com/scipy/scipy/issues/11319
     && pip3 install \
         Cython \
         numpy \
-        pandas \
+        'pandas<1.1' \
         'scipy<1.4' \
     ## scikit-learn 
-    ## --no-use-pep517: pyproject.toml cause to forcely build  (ignoring requirement matched dependency)
+    ## --no-use-pep517: pyproject.toml cause to build  (ignoring requirement matched dependency)
     && pip3 install --no-use-pep517 scikit-learn==${SCIKIT_LEARN_VERSION} \
     ## seaborn/matplotlib
     && pip3 install seaborn \
