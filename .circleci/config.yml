@@ -8,7 +8,7 @@ jobs:
 
     environment:
       VERSION: "0.22.2.post1"
-      TAG: "0.22.2.post1-alpine"
+      TAG: "0.22.2.post1-alpine-r1"
       # TAG: ${VERSION}-alpine
       # TAG_MINOR: ${VERSION%.*}-alpine
       # TAG_MAJOR: ${VERSION%%.*}-alpine 
@@ -76,7 +76,7 @@ jobs:
           command: |
 
             TAG_MINOR=0.22-alpine
-            TAG_MAJOR=${VERSION%%.*}-alpine 
+            TAG_MAJOR=${VERSION%%.*}-alpine
 
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             
@@ -91,4 +91,4 @@ jobs:
             fi
             
             docker logout
-            curl -X POST 'https://hooks.microbadger.com/images/smizy/scikit-learn/kZzvRF3AJodLAJeVZ8aVSKyupOI='
+            # curl -X POST 'https://hooks.microbadger.com/images/smizy/scikit-learn/kZzvRF3AJodLAJeVZ8aVSKyupOI='

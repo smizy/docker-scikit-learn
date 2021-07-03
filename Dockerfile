@@ -23,14 +23,19 @@ RUN set -x \
     && apk --no-cache add \
         fontconfig \
         freetype \
+        libgomp \
         openblas \
+        py3-backcall \
         py3-dateutil \
         py3-decorator \
         py3-defusedxml \
+        py3-entrypoints \
         py3-jinja2 \
         py3-jsonschema \
         py3-markupsafe \
         py3-pexpect \
+        py3-packaging \
+        py3-pickleshare \
         py3-prompt_toolkit \
         py3-pygments \
         py3-ptyprocess \
@@ -39,13 +44,17 @@ RUN set -x \
         py3-wcwidth \
         py3-zmq \
         tini \
-    && pip3 install --upgrade pip \
+    # avoid ImportError: cannot import name "'SCHEME_KEYS'"
+    && pip3 install --upgrade 'pip<21' \
+    && pip3 install wheel \
+    # && pip3 install -r /opt/requirements.txt \
     # PyZMQ with tornado 6.0 raises the wrong warning. #1310
     # https://github.com/zeromq/pyzmq/issues/1310
     # > This was fixed in 17.1.3 by #1263 and does not affect pyzmq 18 or master.
     # && pip3 install 'tornado>=5.0,<6.0' \
     && pip3 install ipython \
-    && pip3 install notebook \
+    # avoid dependency argon2-cffi
+    && pip3 install 'notebook<6.1.0' \
     && pip3 install ipywidgets \
     && pip3 install jupyter-console \
     ## numpy 
@@ -58,7 +67,7 @@ RUN set -x \
         pkgconf \
         python3-dev \
         wget \
-    && pip3 install numpy \
+    && pip3 install 'numpy<1.19' \
     ## scipy
     # - Missing `int64_t` declaration in rectangular_lsap.cpp #11319
     #   https://github.com/scipy/scipy/issues/11319
@@ -70,13 +79,15 @@ RUN set -x \
     ## scikit-learn dependency
     && pip3 install Cython \
     ## scikit-learn 
-    && pip3 install scikit-learn==${SCIKIT_LEARN_VERSION} \
+    && pip3 install --no-use-pep517 scikit-learn==${SCIKIT_LEARN_VERSION} \
     ## seaborn/matplotlib
+    ## avoid pillow dependency 
+    && pip3 install 'matplotlib<3.3' \
     && pip3 install seaborn \
     ## excel read/write 
     && pip3 install xlrd openpyxl \
     ## jp font
-    && wget https://ipafont.ipa.go.jp/IPAexfont/ipaexg00401.zip \
+    && wget https://moji.or.jp/wp-content/ipafont/IPAexfont/ipaexg00401.zip \
     && unzip ipaexg00401.zip \
     && mkdir -p \
         /home/jupyter/.fonts \
