@@ -4,11 +4,11 @@ jobs:
     working_directory: ~/deps
 
     docker:
-      - image: docker:17.06.0-ce-git
+      - image: docker:20.10.14-git
 
     environment:
-      VERSION: "0.23.2"
-      TAG: "0.23.2-alpine"
+      VERSION: "1.1.0"
+      TAG: "1.1.0-alpine"
       # TAG: ${VERSION}-alpine
       # TAG_MINOR: ${VERSION%.*}-alpine
       # TAG_MAJOR: ${VERSION%%.*}-alpine 
@@ -20,7 +20,7 @@ jobs:
       - checkout
 
       - setup_remote_docker:
-          version: 17.06.0-ce
+          version: 20.10.14
 
       # - run:
       #     name: set TAG vars
@@ -91,4 +91,3 @@ jobs:
             fi
             
             docker logout
-            curl -X POST 'https://hooks.microbadger.com/images/smizy/scikit-learn/kZzvRF3AJodLAJeVZ8aVSKyupOI='
