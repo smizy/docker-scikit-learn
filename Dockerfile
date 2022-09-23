@@ -24,23 +24,23 @@ RUN set -x \
         ca-certificates \
         fontconfig \
         freetype \
+        jupyter-notebook \
+        py3-beautifulsoup4 \
         py3-cycler \
+        py3-fastjsonschema \
         py3-fonttools \
         py3-kiwisolver \
         py3-matplotlib \
+        py3-openpyxl \
         py3-pillow \
         py3-pip \
         py3-pyrsistent \
         py3-scikit-learn=1.1.0-r1 \
         su-exec \
         tini \
-    && pip3 install ipython \
-    && pip3 install notebook \
-    && pip3 install ipywidgets \
-    && pip3 install jupyter-console \
     && pip3 install seaborn \
-    ## excel read/write 
-    && pip3 install xlrd openpyxl \
+    ## old .xls read/write 
+    && pip3 install xlrd \
     ## jp font
     && wget https://moji.or.jp/wp-content/ipafont/IPAexfont/ipaexg00401.zip \
     && unzip ipaexg00401.zip \
